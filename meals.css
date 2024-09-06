@@ -1,0 +1,63 @@
+body{
+    margin: 0px;
+}
+nav {
+    background: orange;
+    color: #fff;
+    display: flex;
+    padding: 10Px;
+    list-style: none;
+    justify-content: space-around;
+}
+#select{
+   display: none;
+   display: flex;
+
+}
+#mark{
+    margin-left: -24px;
+    margin-top: 10px;
+    font-size: 18px;
+    color: orange;
+}
+#sel{
+    padding:10px 30px;
+}
+.div {
+    background-image: url("./pexels-enginakyurt-1435895.jpg");
+    background-size: cover;
+    width: 100%;
+    color: white;
+    height: 200px;
+    background-position-y: 600px;
+    padding-top: 11pc;
+}
+
+.div1 {
+    display: flex;
+    list-style-type: none;
+    column-gap: 10px;
+    color: white;
+    align-items: center;
+    padding-left: 30pc;
+}
+
+.div1 li {
+    background-color: orange;
+    padding: 12px 15px;
+    border-radius: 30px;
+}
+
+.div1 input {
+    padding: 14px 40px;
+    border-radius: 25px;
+    border: 1px solid white;
+}
+
+.id {
+    font-size: 28px;
+    display: block;
+    padding-left: 27pc;
+    padding-bottom: 8px;
+    padding-top: 8px;
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="meals.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+    <nav>
+        <section>
+            <span><i class="fa-solid fa-utensils"></i></span>
+            <span>MEAL FINDER</span>
+        </section>
+        <li style="margin-left:15pc;" id='click'><i class="fa-solid fa-bars"></i></li>
+        <section id="select">
+            <select id="sel">
+                <option value="1" class="option">Beef</option>
+                <hr width="40px" height="20px">
+                <option value="2">Chicken</option>
+                <hr>
+                <option value="3">Dessert</option>
+                <hr>
+                <option value="4">Lamb</option>
+                <hr>
+                <option value="5">Miscellaneous</option>
+                <hr>
+                <option value="6">Pasta</option>
+                <hr>
+                <option value="7">Pork</option>
+                <hr>
+                <option value="8">Seafood</option>
+                <hr>
+                <option value="9">Side</option>
+                <hr>
+                <option value="10">Starter</option>
+                <hr>
+                <option value="11">Vegan</option>
+                <hr>
+                <option value="12">Vegetarian</option>
+                <hr>
+                <option value="13">Breakfast</option>
+                <hr>
+                <option value="14">Goat</option>
+
+            </select>
+            <li id="mark"><i class="fa-solid fa-circle-xmark"></i></li>
+        </section>
+    </nav>
+    <section class="div">
+        <div class="div1">
+            <input type="search" placeholder="search recipes here">
+            <li><i class="fa-solid fa-magnifying-glass"></i></li>
+        </div>
+        <span class="id">What are your favourite cuisines?</span>
+        <span style="padding-left: 31pc;"><small>PERSONALIZE YOUR EXPERIENCE</small></span>
+    </section>
+
+
+    <script>
+        let click = document.getElementById('click');
+        click.addEventListener('click', () => {
+            // click.style.display = 'none';
+            // document.getElementById('sel').style.display = "block";
+        })
+
+    </script>
+</body>
+
+</html>
