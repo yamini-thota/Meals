@@ -17,39 +17,11 @@
             <span><i class="fa-solid fa-utensils"></i></span>
             <span>MEAL FINDER</span>
         </section>
-        <li style="margin-left:15pc;" id='click'><i class="fa-solid fa-bars"></i></li>
+        <li id='click' onclick="sel()"><i class="fa-solid fa-bars"></i></li>
         <section id="select">
-            <select id="sel">
-                <option value="1" class="option">Beef</option>
-                <hr width="40px" height="20px">
-                <option value="2">Chicken</option>
-                <hr>
-                <option value="3">Dessert</option>
-                <hr>
-                <option value="4">Lamb</option>
-                <hr>
-                <option value="5">Miscellaneous</option>
-                <hr>
-                <option value="6">Pasta</option>
-                <hr>
-                <option value="7">Pork</option>
-                <hr>
-                <option value="8">Seafood</option>
-                <hr>
-                <option value="9">Side</option>
-                <hr>
-                <option value="10">Starter</option>
-                <hr>
-                <option value="11">Vegan</option>
-                <hr>
-                <option value="12">Vegetarian</option>
-                <hr>
-                <option value="13">Breakfast</option>
-                <hr>
-                <option value="14">Goat</option>
-
+            <select id="mySelect">
             </select>
-            <li id="mark"><i class="fa-solid fa-circle-xmark"></i></li>
+            <li id="mark" onclick="closee()"><i class="fa-solid fa-circle-xmark"></i></li>
         </section>
     </nav>
     <section class="div">
@@ -60,14 +32,86 @@
         <span class="id">What are your favourite cuisines?</span>
         <span style="padding-left: 31pc;"><small>PERSONALIZE YOUR EXPERIENCE</small></span>
     </section>
-
+    <h3 id="head3">CATEGORIES</h3>
+    <div id="container">
+    </div>
+    <h2 id="head2">MEALS</h2>
+    <div id="beef">
+    </div>
 
     <script>
-        let click = document.getElementById('click');
-        click.addEventListener('click', () => {
-            // click.style.display = 'none';
-            // document.getElementById('sel').style.display = "block";
+        // Hamburger functionality
+        const select = document.getElementById('mySelect');
+        const click = document.getElementById('click');
+        function sel() {
+            click.style.display = 'none';
+            select.style.display = 'block';
+            let array = ['Beef', 'Chicken', 'Dessert', 'Lamb', 'Miscellaneous', 'Pasta', 'Pork', 'Seafood', 'Side', 'Starter', 'Vegan', 'Vegetarian', 'Breakfast', 'Goat'];
+            console.log(array);
+            array.forEach(element => {
+                const sel = document.getElementById('mySelect');
+                const opt = document.createElement('option');
+                opt.textContent = element;
+                opt.value = element;
+                sel.appendChild(opt);
+            });
+        };
+
+        // close button functionality
+        function closee() {
+            const mark = document.getElementById('mark');
+            click.style.display = 'block';
+            select.style.display = 'none';
+        };
+
+        // Fetching the 14 Categories by using API concept in js
+        let fun = async () => {
+            const baseUrl = 'https://www.themealdb.com/api/json/v1/1/categories.php';
+            const response = await fetch(baseUrl);
+            const data = await response.json();
+            data.categories.forEach(category => {
+                const divv = document.createElement('div');
+                divv.className = 'div2';
+
+                const title = document.createElement('h4');
+                title.textContent = category.strCategory;
+
+                const img = document.createElement('img');
+                img.src = category.strCategoryThumb;
+                img.alt = category.strCategory;
+
+                divv.appendChild(title);
+                divv.appendChild(img);
+                container.appendChild(divv);
+            });
+
+        };
+        fun();
+        // whenever we click the item display the relative items by using API 
+        container.addEventListener('click', async () => {
+            const head2 = document.getElementById('head2');
+            head2.style.display = 'block';
+            const beeeef = document.getElementById('beef');
+            const beef = await fetch("https://themealdb.com/api/json/v1/1/search.php?s=beef");
+            const beef1 = await beef.json();
+            beef1.meals.forEach(mealss => {
+
+                const BeefAsado = document.createElement('div');
+                BeefAsado.className = 'Asado';
+
+                const beefName = document.createElement('h4');
+                beefName.textContent = mealss.strMeal;
+
+                const imgg = document.createElement('img');
+                imgg.src = mealss.strMealThumb;
+                imgg.alt = mealss.strMeal;
+                BeefAsado.appendChild(imgg);
+                BeefAsado.appendChild(beefName);
+                beeeef.appendChild(BeefAsado);
+
+            })
         })
+
 
     </script>
 </body>
