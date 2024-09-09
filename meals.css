@@ -5,23 +5,27 @@ nav {
     background: orange;
     color: #fff;
     display: flex;
-    padding: 10Px;
+    padding-top: 15px !important;
+    padding: 5px;
     list-style: none;
     justify-content: space-around;
 }
 #select{
    display: none;
    display: flex;
-
+}
+#click{
+    margin-left: 25pc;
 }
 #mark{
     margin-left: -24px;
-    margin-top: 10px;
+    margin-top: 9px;
     font-size: 18px;
     color: orange;
 }
-#sel{
+#mySelect{
     padding:10px 30px;
+    display: none;
 }
 .div {
     background-image: url("./pexels-enginakyurt-1435895.jpg");
@@ -61,3 +65,41 @@ nav {
     padding-bottom: 8px;
     padding-top: 8px;
 }
+#head3{
+    border-bottom: 4px solid orange;
+    margin-left: 100px;
+    width:7%;
+}
+#container {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    margin: 10px 90px;
+   
+}
+.div2{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    margin:8px;
+    border-radius: 5px;
+}
+
+.div2 img {
+    width: 100%;
+ }
+
+.div2 h4 {
+    background: orange;
+    margin-left:60px;
+    padding:2px;
+    
+}
+#head2{
+    display:none;
+}
+#beef{
+    display: grid;
+    grid-template-columns: repeat(5, 1fr); 
+}
+.Asado img{
+    width:50%;
+}
+
