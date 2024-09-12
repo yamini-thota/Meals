@@ -127,4 +127,18 @@ padding: 0px 50px;
     font-size: 15px;
     text-align: center;
 }
-
+#namee{
+    display: flex;
+    color: white;
+    background: orange;
+    /* padding:5px; */
+    /* font-size: 25px; */
+}
+#namee span{
+    margin:15px;
+}
+#heading-3{
+    border-bottom: 4px solid orange;
+   width :13%;
+   margin-left: 40px;
+}
