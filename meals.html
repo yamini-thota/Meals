@@ -33,12 +33,13 @@
         <span style="padding-left: 31pc;"><small>PERSONALIZE YOUR EXPERIENCE</small></span>
     </section>
     <h3 id="head3">CATEGORIES</h3>
-    <div id="container">
-    </div>
-    <h2 id="head2">MEALS</h2>
-    <div id="beef">
-    </div>
+    <h2 id="head4">MEALS</h2>
 
+    <div>
+        <div id="container"></div>
+    </div>
+    <div class="data"></div>
+    
     <script>
         // Hamburger functionality
         const select = document.getElementById('mySelect');
@@ -55,6 +56,9 @@
                 opt.value = element;
                 sel.appendChild(opt);
             });
+            
+
+
         };
 
         // close button functionality
@@ -63,54 +67,54 @@
             click.style.display = 'block';
             select.style.display = 'none';
         };
-
-        // Fetching the 14 Categories by using API concept in js
+        // Display the categories by using API fetch method  
         let fun = async () => {
+            const container = document.getElementById('container');
+            const dataContainer = document.querySelector('.data');
             const baseUrl = 'https://www.themealdb.com/api/json/v1/1/categories.php';
             const response = await fetch(baseUrl);
             const data = await response.json();
+            let categoriesHtml = '';
+
             data.categories.forEach(category => {
-                const divv = document.createElement('div');
-                divv.className = 'div2';
-
-                const title = document.createElement('h4');
-                title.textContent = category.strCategory;
-
-                const img = document.createElement('img');
-                img.src = category.strCategoryThumb;
-                img.alt = category.strCategory;
-
-                divv.appendChild(title);
-                divv.appendChild(img);
-                container.appendChild(divv);
+                categoriesHtml += `
+                <div class='container'>
+                <h4 data-clickid="${category.strCategory}" id="head5">${category.strCategory}</h4>
+                <img class="image hidden" alt="${category.strCategory}" data-clickid="${category.strCategory}" src="${category.strCategoryThumb}">
+                </div>
+                `;
             });
 
+            container.innerHTML = categoriesHtml;
+
+            const image = document.querySelectorAll('.image');
+            image.forEach(img => {
+                img.addEventListener('click', async function (e) {  // Use 'this' instead of event.target
+                    const category = e.target.getAttribute('data-clickid');
+                    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+                    const mealsData = await response.json();
+                    let mealsHtml = '';
+                    mealsData.meals.forEach(meal => {
+                        mealsHtml +=
+                            `<div class='container1'>
+                                <img src="${meal.strMealThumb}" alt="${meal.strMeal}" width=90% height=200px>
+                                <p id="para">${meal.strMeal}</p>
+                        </div>
+                        `;
+                    });
+
+                    dataContainer.innerHTML = mealsHtml;
+                    container.style.display='none';
+                    document.getElementById('head3').style.display='none';
+                    document.getElementById('head4').style.display='block';
+
+                });
+            });
         };
+
+
         fun();
-        // whenever we click the item display the relative items by using API 
-        container.addEventListener('click', async () => {
-            const head2 = document.getElementById('head2');
-            head2.style.display = 'block';
-            const beeeef = document.getElementById('beef');
-            const beef = await fetch("https://themealdb.com/api/json/v1/1/search.php?s=beef");
-            const beef1 = await beef.json();
-            beef1.meals.forEach(mealss => {
 
-                const BeefAsado = document.createElement('div');
-                BeefAsado.className = 'Asado';
-
-                const beefName = document.createElement('h4');
-                beefName.textContent = mealss.strMeal;
-
-                const imgg = document.createElement('img');
-                imgg.src = mealss.strMealThumb;
-                imgg.alt = mealss.strMeal;
-                BeefAsado.appendChild(imgg);
-                BeefAsado.appendChild(beefName);
-                beeeef.appendChild(BeefAsado);
-
-            })
-        })
 
 
     </script>
