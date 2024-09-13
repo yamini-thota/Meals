@@ -15,10 +15,11 @@ nav {
 #select {
     display: none;
     display: flex;
+    /* margin-left: 10pc; */
 }
 
 #click {
-    margin-left: 25pc;
+    margin-left: 35pc;
 }
 
 #mark {
@@ -76,7 +77,9 @@ nav {
     border-bottom: 4px solid orange;
     margin-left: 100px;
     width: 7%;
-    margin-top: 40px;
+    margin-top: 50px;
+    margin-bottom: -40px;
+    
     
 }
 #head4 {
@@ -90,12 +93,12 @@ nav {
 #container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
-    margin: 30px 60px;
+    margin: 0px 10px;
 }
 .data{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    margin: 30px 50px;
+    margin: 30px 10px;
 padding: 0px 50px;
 }
 .container{
@@ -141,4 +144,23 @@ padding: 0px 50px;
     border-bottom: 4px solid orange;
    width :13%;
    margin-left: 40px;
+}
+#searchResult{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    margin: 60px;
+}
+#order{
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+    list-style: none;
+    margin:15px 10px;
+    padding: 02px 0px;
+    border-radius: 10px;
+    text-align: center;
+}
+#paralist{
+    /* color: white; */
+    background-color: orange;
+    padding:5px;
+    
 }

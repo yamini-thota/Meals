@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" onclick="home()">
     <title>Meal Finder</title>
     <link rel="stylesheet" href="meals.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -26,21 +26,24 @@
     </nav>
     <section class="div">
         <div class="div1">
-            <input type="search" placeholder="search recipes here">
-            <li><i class="fa-solid fa-magnifying-glass"></i></li>
+            <input type="search" placeholder="search recipes here" id="searchInput">
+            <li id="searchButton" onclick="searchButton()"><i class="fa-solid fa-magnifying-glass"></i></li>
         </div>
         <span class="id">What are your favourite cuisines?</span>
         <span style="padding-left: 31pc;"><small>PERSONALIZE YOUR EXPERIENCE</small></span>
     </section>
-    <h3 id="head3">CATEGORIES</h3>
     <h2 id="head4">MEALS</h2>
+    <h2 id="head3">CATEGORIES</h2>
     <p id="para7"></p>
+    <p id="searchResult"></p>
 
-    <div>
-        <div id="container"></div>
-    </div>
+    <div id="container"></div>
+
     <div class="data"></div>
+    <div id="decrimination"></div>
+    <div class="bottomCategory"></div>
     <div class="container3"></div>
+
 
     <script>
         // Hamburger functionality
@@ -66,12 +69,45 @@
             select.style.display = 'none';
         };
 
+        async function searchButton() {
+            // const searchButton=document.getElementById('searchButton');
+            const searchInput = document.getElementById('searchInput').value;
+            let searchResult = document.getElementById('searchResult');
+            searchResult.innerHTML = ''
+            const searchh = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchInput}`);
+            const response = await searchh.json();
+            if (response.meals && response.meals.length > 0) {
+                searchMeal = ''
+                response.meals.forEach(searchdata => {
+                    searchMeal += `
+                    <div id='unorder'>
+                   
+                        <ul id='order'>
+                            <li> <h5 id='paralist'> ${searchdata.strMeal}</h5></li>
+                            <li><img src="${searchdata.strMealThumb}" alt='${searchdata.strMeal}' width=90%> </li>
+                            </ul>
+                        </div>
+                        `;
+                });
+                searchMeal += `</div>`;
+                searchResult.innerHTML += searchMeal;
+                head4.style.display = 'block';
+                head3.style.display = 'none';
+            }
+            else {
+                searchResult.innerHTML = `<code>${searchInput} item is not Available</code>`;
+                searchResult.style.marginLeft = '100px';
+                searchResult.style.fontSize = '25px';
+                searchResult.style.display = 'block';
+            }
+        };
+
         // Display the categories by using API fetch method  
+        const decrimination=document.getElementById('decrimination');
         let fun = async () => {
             const container = document.getElementById('container');
             const dataContainer = document.querySelector('.data');
-            const baseUrl = 'https://www.themealdb.com/api/json/v1/1/categories.php';
-            const response = await fetch(baseUrl);
+            const response = await fetch('https://www.themealdb.com/api/json/v1/1/categories.php');
             const data = await response.json();
             let categoriesHtml = '';
 
@@ -83,14 +119,14 @@
                     </div>
                 `;
             });
-
+        
             container.innerHTML = categoriesHtml;
-
+            head3.style.display='none';
             const images = document.querySelectorAll('.image');
             images.forEach(img => {
                 img.addEventListener('click', async function (e) {
                     const category = e.target.getAttribute('data-clickid');
-                    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`);
+                    const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${category}`);
                     const mealsData = await response.json();
                     if (mealsData && mealsData.meals) {
                         let mealsHtml = '';
@@ -106,8 +142,11 @@
 
                         dataContainer.innerHTML = mealsHtml;
                         container.style.display = 'none';
-                        document.getElementById('head3').style.display = 'none';
+                       
                         document.getElementById('head4').style.display = 'block';
+                        container.style.display = 'none';
+
+
 
                         const mealImages = document.querySelectorAll('#clickImg');
                         mealImages.forEach(mealImg => {
@@ -146,7 +185,7 @@
                                         `;
                                     });
                                     document.querySelector('.container3').innerHTML = mealDetailsHtml;
-                                    container.style.display = 'none';
+                                    // container.style.display = 'none';
                                 }
                             });
                         });
@@ -171,6 +210,10 @@
         }
 
         fun();
+
+        //   function  home(){
+        //         fun();
+        //     }
     </script>
 </body>
 
