@@ -14,14 +14,10 @@ nav {
 }
 
 #select {
-    display: none;
+    /* display: none; */
     display: flex;
     /* margin-left: 10pc; */
 }
-
-/* #click { */
-    /* margin-left: 35pc; */
-/* } */
 
 #mark {
     /* margin-left: -24px; */
